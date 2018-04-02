@@ -1,6 +1,7 @@
 //notes routes
 
 var ObjectID = require('mongodb').ObjectID;
+var metroEndPoint = require('../../config/metro_api');
 
 module.exports = function(app, db) {
 

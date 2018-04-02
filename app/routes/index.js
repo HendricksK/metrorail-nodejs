@@ -1,6 +1,6 @@
 //routes/index.js
 
-const metroRoutes = require('./metrorail')
+const metroRoutes = require('./metrorail');
 
 module.exports = function(app, db) {
 	metroRoutes(app, db);
