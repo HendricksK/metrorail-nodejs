@@ -14,7 +14,7 @@ MongoClient.connect(db.url, (err, database) => {
     
     if (err) return console.log(err) //if error occurs, log said error
     
-    db = database.db('metro_rail') //setting db name and parsing to routes below
+    db = database.db('metro-nodejs') //setting db name and parsing to routes below
     
     require('./app/routes')(app, db);
 

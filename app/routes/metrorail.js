@@ -13,33 +13,53 @@ module.exports = function(app, db) {
 	});
 
 	// //GET
-	// app.get('/notes/:id', (req,res) => {
+	app.get('/metro-rail/updates/line_name/:line', (req,res) => {
 	
-	// 	var id = req.params.id;
-	// 	var details = { '_id': new ObjectID(id) };	
+		var line_name = req.params.line;
 
-	//     db.collection('notes').find(details).toArray( (err, result) => {
-	//       	if (err) {
-	//         	res.send({'error':'An error has occurred'});
-	//       	} else {
-	//       		res.send(result);
-	//       	}
-	// 	});
-	// });
+		var details = { 'line_name': line_name };	
+
+	    db.collection('metro-rail').find(details).toArray( (err, result) => {
+	      	if (err) {
+	        	res.send({'error':'An error has occurred -> ' + err});
+	      	} else {
+	      		res.send(result);
+	      	}
+		});
+	});
+
+	// //GET
+	app.get('/metro-rail/updates/train_id/:train_id', (req,res) => {
+	
+		var train_id = req.params.train_id;
+
+		var details = { 'train_id': train_id };	
+
+	    db.collection('metro-rail').find(details).toArray( (err, result) => {
+	      	if (err) {
+	        	res.send({'error':'An error has occurred -> ' + err});
+	      	} else {
+	      		res.send(result);
+	      	}
+		});
+	});
 
 	// //POST
-	// app.post('/notes', (req,res) => {
+	app.post('/metro-rail/update', (req,res) => {
 
-	// 	var note = { text: req.body.body, title: req.body.title };
+		var update = { 
+			line_name: req.body.line_name, 
+			train_id: req.body.train_id 
+		};
 	    
-	//     db.collection('notes').insert(note, (err, result) => {
-	//       	if (err) { 
-	//         	res.send({ 'error': 'An error has occurred' }); 
-	//       	} else {
-	//         	res.send(result.ops[0]);
-	//       	}
-	//     });
-	// })
+	    db.collection('metro-rail').insert(update, (err, result) => {
+	      	if (err) { 
+	        	res.send({ 'error': 'An error has occurred -> ' + err }); 
+	      	} else {
+	        	res.send(result.ops[0]);
+	      	}
+	    });
+	})
 
 	// //DELETE
 	// app.delete('/notes/:id', (req, res) => {
